@@ -8,16 +8,16 @@
 <body>
 	<h1>User Management</h1>
 	<h2>
-		<a href="new">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list">List
+		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list-user">List
 			All Users</a>
 
 	</h2>
 	<div align="center">
 		<c:if test="${user != null}">
-			<form action="update" method="post">
+			<form action="update-user" method="post">
 		</c:if>
 		<c:if test="${user == null}">
-			<form action="insert" method="post">
+			<form action="insert-user" method="post">
 		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>

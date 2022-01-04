@@ -10,7 +10,7 @@
 	<h1>User Management</h1>
 	<!-- JSP page for displaying all users from the database. Let's create a list-user.jsp -->
 	<h2>
-		<a href="new">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list">List
+		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list-user">List
 			All Users</a>
 
 	</h2>
@@ -36,9 +36,9 @@
 					<td><c:out value="${user.email}" /></td>
 					<td><c:out value="${user.username}" /></td>
 					<td><c:out value="${user.password}" /></td>
-					<td><a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+					<td><a href="edit-user?id=<c:out value='${user.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="delete?id=<c:out value='${user.id}' />">Delete</a></td>
+						href="delete-user?id=<c:out value='${user.id}' />">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

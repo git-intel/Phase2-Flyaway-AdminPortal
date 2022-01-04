@@ -41,19 +41,19 @@ public class UserServlet extends HttpServlet {
 
 		try {
 			switch (action) {
-			case "/new":
+			case "/new-user":
 				showNewForm(request, response);
 				break;
-			case "/insert":
+			case "/insert-user":
 				insertUser(request, response);
 				break;
-			case "/delete":
+			case "/delete-user":
 				deleteUser(request, response);
 				break;
-			case "/edit":
+			case "/edit-user":
 				showEditForm(request, response);
 				break;
-			case "/update":
+			case "/update-user":
 				updateUser(request, response);
 				break;
 			default:
