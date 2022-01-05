@@ -1,4 +1,5 @@
-package usermanagement.web;
+
+package flyaway.routing.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse; 
 
-import usermanagement.dao.UserDao;
-import usermanagement.model.User;
+import flyaway.usermanagement.dao.UserDao;
+import flyaway.usermanagement.model.User;
 
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
@@ -22,7 +23,7 @@ import usermanagement.model.User;
  */
 
 @WebServlet("/")
-public class UserServlet extends HttpServlet {
+public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao userDao;
 

@@ -1,4 +1,4 @@
-package usermanagement.util;
+package flyaway.usermanagement.util;
 
 import java.util.Properties;
 
@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import usermanagement.model.User;
+import flyaway.usermanagement.model.User;
 
 /**
  * Java based configuration

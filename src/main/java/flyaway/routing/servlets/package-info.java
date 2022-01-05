@@ -6,4 +6,4 @@
  * 		Create a UserServlet.java create UserServlet that acts
  *         as a page controller to handle all requests from the client
  */
-package usermanagement.web;
+package flyaway.routing.servlets;

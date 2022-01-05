@@ -1,12 +1,12 @@
-package usermanagement.dao;
+package flyaway.usermanagement.dao;
 
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import usermanagement.model.User;
-import usermanagement.util.HibernateUtil;
+import flyaway.usermanagement.model.User;
+import flyaway.usermanagement.util.HibernateUtil;
 
 /**
  * CRUD database operations

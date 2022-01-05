@@ -10,4 +10,4 @@
  * 		DB name: fly_away
  *
  */
-package usermanagement.model;
+package flyaway.usermanagement.model;

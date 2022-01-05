@@ -1,4 +1,4 @@
-package usermanagement.model;
+package flyaway.usermanagement.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

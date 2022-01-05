@@ -6,4 +6,4 @@
  *
  *	Create Hibernate Util Class
  */
-package usermanagement.util;
+package flyaway.usermanagement.util;
