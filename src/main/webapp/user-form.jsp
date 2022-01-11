@@ -8,8 +8,8 @@
 <body>
 	<h1>User Management</h1>
 	<h2>
-		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list-user">List
-			All Users</a>
+		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a
+			href="list-user">List All Users</a>&nbsp;&nbsp;&nbsp; <a href="home">Home</a>
 
 	</h2>
 	<div align="center">

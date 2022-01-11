@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse; 
+import javax.servlet.http.HttpServletResponse;
 
 import flyaway.usermanagement.dao.UserDao;
 import flyaway.usermanagement.model.User;
@@ -57,8 +57,14 @@ public class DashboardServlet extends HttpServlet {
 			case "/update-user":
 				updateUser(request, response);
 				break;
-			default:
+			case "/list-user":
 				listUser(request, response);
+				break;
+			case "/home":
+				homePage(request, response);
+				break;
+			default:
+				homePage(request, response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -71,6 +77,12 @@ public class DashboardServlet extends HttpServlet {
 		List<User> listUser = userDao.getAllUser();
 		request.setAttribute("listUser", listUser);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void homePage(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -98,7 +110,7 @@ public class DashboardServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		User newUser = new User(first_name, last_name, email, username, password);
 		userDao.saveUser(newUser);
-		response.sendRedirect("list");
+		response.sendRedirect("list-user");
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -111,12 +123,12 @@ public class DashboardServlet extends HttpServlet {
 
 		User user = new User(id, first_name, last_name, email, username, password);
 		userDao.updateUser(user);
-		response.sendRedirect("list");
+		response.sendRedirect("list-user");
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		userDao.deleteUser(id);
-		response.sendRedirect("list");
+		response.sendRedirect("list-user");
 	}
 }

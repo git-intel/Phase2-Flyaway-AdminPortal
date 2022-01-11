@@ -10,8 +10,8 @@
 	<h1>User Management</h1>
 	<!-- JSP page for displaying all users from the database. Let's create a list-user.jsp -->
 	<h2>
-		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a href="list-user">List
-			All Users</a>
+		<a href="new-user">Add New User</a> &nbsp;&nbsp;&nbsp; <a
+			href="list-user">List All Users</a> &nbsp;&nbsp;&nbsp; <a href="home">Home</a>
 
 	</h2>
 
