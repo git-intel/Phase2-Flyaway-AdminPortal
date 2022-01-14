@@ -9,8 +9,9 @@
 <body>
 	<h1>Fly Away Admin Console</h1>
 	<h2>
-		<a href="list-user">User Configuration</a> &nbsp;&nbsp;&nbsp; <a
-			href="list-flight">Flight Configuration</a>
+		<a href="list-user">User Management</a> &nbsp;&nbsp;&nbsp; <a
+			href="list-flight">Airline Management</a> &nbsp;&nbsp;&nbsp; <a
+			href="list-airport">Airport Configurations</a>
 
 	</h2>
 </body>

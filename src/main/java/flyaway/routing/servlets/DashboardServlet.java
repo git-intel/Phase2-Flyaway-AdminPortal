@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import flyaway.usermanagement.dao.UserDao;
+import flyaway.airlines.dao.AirportDao;
 import flyaway.usermanagement.model.User;
+import flyaway.airlines.model.airport;
 
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
@@ -26,9 +28,11 @@ import flyaway.usermanagement.model.User;
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao userDao;
+	private AirportDao airportDao;
 
 	public void init() {
 		userDao = new UserDao();
+		airportDao = new AirportDao();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +46,9 @@ public class DashboardServlet extends HttpServlet {
 
 		try {
 			switch (action) {
+//			User Config
 			case "/new-user":
-				showNewForm(request, response);
+				showNewUserForm(request, response);
 				break;
 			case "/insert-user":
 				insertUser(request, response);
@@ -52,7 +57,7 @@ public class DashboardServlet extends HttpServlet {
 				deleteUser(request, response);
 				break;
 			case "/edit-user":
-				showEditForm(request, response);
+				showUserEditForm(request, response);
 				break;
 			case "/update-user":
 				updateUser(request, response);
@@ -60,6 +65,26 @@ public class DashboardServlet extends HttpServlet {
 			case "/list-user":
 				listUser(request, response);
 				break;
+//				Airport Config
+			case "/new-airport":
+				showNewAirportForm(request, response);
+				break;
+			case "/list-airport":
+				listAirport(request, response);
+				break;
+			case "/delete-airport":
+				deleteAirport(request, response);
+				break;
+			case "/update-airport":
+				updateAirport(request, response);
+				break;
+			case "/edit-airport":
+				showAirportEditForm(request, response);
+				break;
+			case "/insert-airport":
+				insertAirport(request, response);
+				break;
+//				Home
 			case "/home":
 				homePage(request, response);
 				break;
@@ -72,27 +97,22 @@ public class DashboardServlet extends HttpServlet {
 		}
 	}
 
-	private void listUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<User> listUser = userDao.getAllUser();
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-		dispatcher.forward(request, response);
-	}
-
+//	-----Home Page Start--------
 	private void homePage(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request, response);
 	}
+//	-----Home Page End----------
 
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+//	-----Users Page Start-------
+	private void showNewUserForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+	private void showUserEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		User existingUser = userDao.getUser(id);
@@ -100,6 +120,14 @@ public class DashboardServlet extends HttpServlet {
 		request.setAttribute("user", existingUser);
 		dispatcher.forward(request, response);
 
+	}
+
+	private void listUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<User> listUser = userDao.getAllUser();
+		request.setAttribute("listUser", listUser);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -131,4 +159,63 @@ public class DashboardServlet extends HttpServlet {
 		userDao.deleteUser(id);
 		response.sendRedirect("list-user");
 	}
+
+//	-----Users Page End-----------
+//	-----Airport Page Start-------
+	private void listAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<airport> listAirport = airportDao.getAllAirport();
+		request.setAttribute("listAirport", listAirport);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("airport-list.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showNewAirportForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("airport-config-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showAirportEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		airport existingAirport = airportDao.getAirport(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("airport-config-form.jsp");
+		request.setAttribute("airport", existingAirport);
+		dispatcher.forward(request, response);
+
+	}
+
+	private void insertAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		String airport_name = request.getParameter("airport_name");
+		String airport_code = request.getParameter("airport_code");
+		String country = request.getParameter("country");
+		String state = request.getParameter("state");
+		airport port = new airport(airport_name, airport_code, country, state);
+		airportDao.saveAirport(port);
+		response.sendRedirect("list-airport");
+	}
+
+	private void updateAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String airport_name = request.getParameter("airport_name");
+		String airport_code = request.getParameter("airport_code");
+		String country = request.getParameter("country");
+		String state = request.getParameter("state");
+
+		airport port = new airport(id, airport_name, airport_code, country, state);
+		airportDao.updateAirport(port);
+		response.sendRedirect("list-airport");
+	}
+
+	private void deleteAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		airportDao.deleteAirport(id);
+		response.sendRedirect("list-airport");
+	}
+
+//	-----Airport Page End---------
 }
