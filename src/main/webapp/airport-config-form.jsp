@@ -35,14 +35,14 @@
 				<input type="hidden" name="id" value="<c:out value='${port.id}' />" />
 			</c:if>
 			<tr>
-				<th>Airport Name:</th>
-				<td><input type="text" name="airport_name" size="45"
-					value="<c:out value='${port.airport_name}' />" /></td>
-			</tr>
-			<tr>
 				<th>Airport code:</th>
 				<td><input type="text" name="airport_code" size="45"
 					value="<c:out value='${port.airport_code}' />" /></td>
+			</tr>
+			<tr>
+				<th>Airport Name:</th>
+				<td><input type="text" name="airport_name" size="45"
+					value="<c:out value='${port.airport_name}' />" /></td>
 			</tr>
 			<tr>
 				<th>Country:</th>

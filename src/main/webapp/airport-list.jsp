@@ -8,7 +8,6 @@
 <body>
 
 	<h1>Airports Configuration</h1>
-	<!-- JSP page for displaying all users from the database. Let's create a list-user.jsp -->
 	<h2>
 		<a href="new-airport">Add New Airport</a> &nbsp;&nbsp;&nbsp; <a
 			href="list-airport">List All Airports</a>&nbsp;&nbsp;&nbsp; <a
@@ -23,17 +22,17 @@
 			</caption>
 			<tr>
 				<th>ID</th>
-				<th>Airport Name</th>
-				<th>Airport code</th>
+				<th>AirportCode</th>
+				<th>AirportName</th>
 				<th>Country</th>
 				<th>State</th>
 
 			</tr>
-			<c:forEach var="port" items="${listAirport}">
+			<c:forEach var="port" items="${listAirports}">
 				<tr>
 					<td><c:out value="${port.id}" /></td>
-					<td><c:out value="${port.airport_name}" /></td>
 					<td><c:out value="${port.airport_code}" /></td>
+					<td><c:out value="${port.airport_name}" /></td>
 					<td><c:out value="${port.country}" /></td>
 					<td><c:out value="${port.state}" /></td>
 

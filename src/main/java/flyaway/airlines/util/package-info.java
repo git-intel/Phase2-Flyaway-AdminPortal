@@ -1,1 +1,0 @@
-package flyaway.airlines.util;
