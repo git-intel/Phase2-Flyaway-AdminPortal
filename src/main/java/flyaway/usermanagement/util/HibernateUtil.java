@@ -9,6 +9,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 import flyaway.airlines.model.Airport;
+import flyaway.airlines.model.FlightAtPort;
 import flyaway.usermanagement.model.User;
 
 /**
@@ -42,7 +43,8 @@ public class HibernateUtil {
 				configuration.setProperties(settings);
 				configuration.addAnnotatedClass(User.class);
 				configuration.addAnnotatedClass(Airport.class);
-				
+				configuration.addAnnotatedClass(FlightAtPort.class);
+
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();
 				System.out.println("Hibernate Java Config serviceRegistry created");

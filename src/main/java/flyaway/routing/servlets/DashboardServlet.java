@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import flyaway.usermanagement.dao.UserDao;
 import flyaway.airlines.dao.AirportDao;
+import flyaway.airlines.dao.FlightAtPortDao;
 import flyaway.usermanagement.model.User;
 import flyaway.airlines.model.Airport;
+import flyaway.airlines.model.FlightAtPort;
+
 
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
@@ -29,10 +32,12 @@ public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao userDao;
 	private AirportDao airportDao;
-
+	private FlightAtPortDao flightAtPortDao;
+	
 	public void init() {
 		userDao = new UserDao();
 		airportDao = new AirportDao();
+		flightAtPortDao = new FlightAtPortDao();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -83,6 +88,25 @@ public class DashboardServlet extends HttpServlet {
 				break;
 			case "/list-airport":
 				listAirport(request, response);
+				break;
+//				Flight To Airport Config
+			case "/new-flight-to-airport":
+				showNewFlightToAirportForm(request, response);
+				break;
+			case "/edit-flight-to-airport":
+				showFlightToAirportEditForm(request, response);
+				break;
+			case "/insert-flight-to-airport":
+				insertFlightToAirport(request, response);
+				break;
+			case "/delete-flight-to-airport":
+				deleteFlightToAirport(request, response);
+				break;
+			case "/update-flight-to-airport":
+				updateFlightToAirport(request, response);
+				break;
+			case "/list-flight-to-airport":
+				listFlightToAirport(request, response);
 				break;
 //				Home
 			case "/home":
@@ -218,4 +242,74 @@ public class DashboardServlet extends HttpServlet {
 	}
 
 //	-----Airport Page End---------
+//	-----FlightToAirport Page Start-------
+	private void listFlightToAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<FlightAtPort> listOfFlightstoPort = flightAtPortDao.getAllFlightAtPort();
+		request.setAttribute("listOfFlightstoPort", listOfFlightstoPort);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("flight-to-port-list.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showNewFlightToAirportForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("flight-to-port-config-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showFlightToAirportEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		FlightAtPort existingJourney= flightAtPortDao.getFlightAtPort(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("flight-to-port-config-form.jsp");
+		request.setAttribute("journey", existingJourney);
+		dispatcher.forward(request, response);
+
+	}
+
+	private void insertFlightToAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		String source_airport_code = request.getParameter("source_airport_code");
+		String destination_airport_code = request.getParameter("destination_airport_code");
+		String source_airport_name = request.getParameter("source_airport_name");
+		String destination_airport_name = request.getParameter("destination_airport_name");
+		String flight_code = request.getParameter("flight_code");
+		String flight_name = request.getParameter("flight_name");
+		String flight_departuretimedate = request.getParameter("flight_departuretimedate");
+		String flight_arrivaltimedate = request.getParameter("flight_arrivaltimedate");
+		String ticket_price = request.getParameter("ticket_price");
+		
+		FlightAtPort journey = new FlightAtPort(source_airport_code, destination_airport_code, source_airport_name, destination_airport_name,
+				flight_code, flight_name, flight_departuretimedate, flight_arrivaltimedate, ticket_price);
+		flightAtPortDao.saveFlightAtPort(journey);
+		response.sendRedirect("list-flight-to-airport");
+	}
+
+	private void updateFlightToAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String source_airport_code = request.getParameter("source_airport_code");
+		String destination_airport_code = request.getParameter("destination_airport_code");
+		String source_airport_name = request.getParameter("source_airport_name");
+		String destination_airport_name = request.getParameter("destination_airport_name");
+		String flight_code = request.getParameter("flight_code");
+		String flight_name = request.getParameter("flight_name");
+		String flight_departuretimedate = request.getParameter("flight_departuretimedate");
+		String flight_arrivaltimedate = request.getParameter("flight_arrivaltimedate");
+		String ticket_price = request.getParameter("ticket_price");
+
+		FlightAtPort journey = new FlightAtPort(id, source_airport_code, destination_airport_code, source_airport_name, destination_airport_name,
+				 flight_code, flight_name, flight_departuretimedate, flight_arrivaltimedate, ticket_price);
+		flightAtPortDao.updateFlightAtPort(journey);
+		response.sendRedirect("list-flight-to-airport");
+	}
+
+	private void deleteFlightToAirport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		flightAtPortDao.deleteFlightAtPort(id);
+		response.sendRedirect("list-flight-to-airport");
+	}
+
+//	-----FlightToAirport Page End---------
 }
