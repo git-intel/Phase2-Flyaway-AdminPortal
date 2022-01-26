@@ -68,14 +68,24 @@
 					value="<c:out value='${journey.flight_name}' />" /></td>
 			</tr>
 			<tr>
-				<th>Flight Departure time:</th>
-				<td><input type="text" name="flight_departuretimedate" size="45"
-					value="<c:out value='${journey.flight_departuretimedate}' />" /></td>
+				<th>Departure Date:(MM/dd/yyyy)</th>
+				<td><input type="text" name="flight_departure_date" size="45"
+					value="<c:out value='${journey.flight_departure_date}' />" /></td>
 			</tr>
 			<tr>
-				<th>Flight Arrival time:</th>
-				<td><input type="text" name="flight_arrivaltimedate" size="45"
-					value="<c:out value='${journey.flight_arrivaltimedate}' />" /></td>
+				<th>Departure time:(hh:mm am/pm)</th>
+				<td><input type="text" name="flight_departure_time" size="45"
+					value="<c:out value='${journey.flight_departure_time}' />" /></td>
+			</tr>
+			<tr>
+				<th>Arrival Date:(MM/dd/yyyy)</th>
+				<td><input type="text" name="flight_departure_date" size="45"
+					value="<c:out value='${journey.flight_departure_date}' />" /></td>
+			</tr>
+			<tr>
+				<th>Arrival time:(hh:mm am/pm)</th>
+				<td><input type="text" name="flight_arrival_time" size="45"
+					value="<c:out value='${journey.flight_arrival_time}' />" /></td>
 			</tr>
 			<tr>
 				<th>Ticket Price ($):</th>

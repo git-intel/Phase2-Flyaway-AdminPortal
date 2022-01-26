@@ -3,6 +3,8 @@ package flyaway.routing.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +21,6 @@ import flyaway.usermanagement.model.User;
 import flyaway.airlines.model.Airport;
 import flyaway.airlines.model.FlightAtPort;
 
-
 /**
  * ControllerServlet.java This servlet acts as a page controller for the
  * application, handling all requests from the user.
@@ -33,7 +34,7 @@ public class DashboardServlet extends HttpServlet {
 	private UserDao userDao;
 	private AirportDao airportDao;
 	private FlightAtPortDao flightAtPortDao;
-	
+
 	public void init() {
 		userDao = new UserDao();
 		airportDao = new AirportDao();
@@ -260,7 +261,7 @@ public class DashboardServlet extends HttpServlet {
 	private void showFlightToAirportEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		FlightAtPort existingJourney= flightAtPortDao.getFlightAtPort(id);
+		FlightAtPort existingJourney = flightAtPortDao.getFlightAtPort(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("flight-to-port-config-form.jsp");
 		request.setAttribute("journey", existingJourney);
 		dispatcher.forward(request, response);
@@ -269,18 +270,39 @@ public class DashboardServlet extends HttpServlet {
 
 	private void insertFlightToAirport(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
+//		java.text.DateFormat format = new java.text.SimpleDateFormat("MM/dd/yyyy");
+//		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+//		java.util.Date departure_date = null;
+//		try {
+//			departure_date = format.parse(request.getParameter("flight_departure_date"));
+//		} catch (ParseException e1) {
+//			e1.printStackTrace();
+//		}
+//		java.sql.Date flight_departure_date = new java.sql.Date(departure_date.getTime());
+//
+//		java.util.Date arrival_date = null;
+//		try {
+//			arrival_date = format.parse(request.getParameter("flight_arrival_date"));
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		java.sql.Date flight_arrival_date = new java.sql.Date(arrival_date.getTime());
+
 		String source_airport_code = request.getParameter("source_airport_code");
 		String destination_airport_code = request.getParameter("destination_airport_code");
 		String source_airport_name = request.getParameter("source_airport_name");
 		String destination_airport_name = request.getParameter("destination_airport_name");
 		String flight_code = request.getParameter("flight_code");
 		String flight_name = request.getParameter("flight_name");
-		String flight_departuretimedate = request.getParameter("flight_departuretimedate");
-		String flight_arrivaltimedate = request.getParameter("flight_arrivaltimedate");
+		String flight_departure_date = request.getParameter("flight_departure_date");
+		String flight_arrival_date = request.getParameter("flight_arrival_date");
+		String flight_departure_time = request.getParameter("flight_departure_time");
+		String flight_arrival_time = request.getParameter("flight_arrival_time");
 		String ticket_price = request.getParameter("ticket_price");
-		
-		FlightAtPort journey = new FlightAtPort(source_airport_code, destination_airport_code, source_airport_name, destination_airport_name,
-				flight_code, flight_name, flight_departuretimedate, flight_arrivaltimedate, ticket_price);
+
+		FlightAtPort journey = new FlightAtPort(source_airport_code, destination_airport_code, source_airport_name,
+				destination_airport_name, flight_code, flight_name, flight_departure_date, flight_departure_time,
+				flight_arrival_date, flight_arrival_time, ticket_price);
 		flightAtPortDao.saveFlightAtPort(journey);
 		response.sendRedirect("list-flight-to-airport");
 	}
@@ -288,18 +310,22 @@ public class DashboardServlet extends HttpServlet {
 	private void updateFlightToAirport(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+	
 		String source_airport_code = request.getParameter("source_airport_code");
 		String destination_airport_code = request.getParameter("destination_airport_code");
 		String source_airport_name = request.getParameter("source_airport_name");
 		String destination_airport_name = request.getParameter("destination_airport_name");
 		String flight_code = request.getParameter("flight_code");
 		String flight_name = request.getParameter("flight_name");
-		String flight_departuretimedate = request.getParameter("flight_departuretimedate");
-		String flight_arrivaltimedate = request.getParameter("flight_arrivaltimedate");
+		String flight_departure_date = request.getParameter("flight_departure_date");
+		String flight_arrival_date = request.getParameter("flight_arrival_date");
+		String flight_departure_time = request.getParameter("flight_departure_time");
+		String flight_arrival_time = request.getParameter("flight_arrival_time");
 		String ticket_price = request.getParameter("ticket_price");
 
-		FlightAtPort journey = new FlightAtPort(id, source_airport_code, destination_airport_code, source_airport_name, destination_airport_name,
-				 flight_code, flight_name, flight_departuretimedate, flight_arrivaltimedate, ticket_price);
+		FlightAtPort journey = new FlightAtPort(id, source_airport_code, destination_airport_code, source_airport_name,
+				destination_airport_name, flight_code, flight_name, flight_departure_date, flight_departure_time,
+				flight_arrival_date, flight_arrival_time, ticket_price);
 		flightAtPortDao.updateFlightAtPort(journey);
 		response.sendRedirect("list-flight-to-airport");
 	}

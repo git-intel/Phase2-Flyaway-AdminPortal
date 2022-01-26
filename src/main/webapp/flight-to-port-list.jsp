@@ -28,8 +28,10 @@
 				<th>DestinationName</th>
 				<th>FlightCode</th>
 				<th>FlightName</th>
-				<th>DepartureTime</th>
-				<th>ArrivalTime</th>
+				<th>DepartureDate</th>
+				<th>Time</th>
+				<th>ArrivalDate</th>
+				<th>Time</th>
 				<th>Price($)</th>
 
 			</tr>
@@ -42,8 +44,10 @@
 					<td><c:out value="${flight.destination_airport_name}" /></td>
 					<td><c:out value="${flight.flight_code}" /></td>
 					<td><c:out value="${flight.flight_name}" /></td>
-					<td><c:out value="${flight.flight_departuretimedate}" /></td>
-					<td><c:out value="${flight.flight_arrivaltimedate}" /></td>
+					<td><c:out value="${flight.flight_departure_date}" /></td>
+					<td><c:out value="${flight.flight_departure_time}" /></td>
+					<td><c:out value="${flight.flight_arrival_date}" /></td>
+					<td><c:out value="${flight.flight_arrival_time}" /></td>
 					<td><c:out value="${flight.ticket_price}" /></td>
 					<td><a
 						href="edit-flight-to-airport?id=<c:out value='${flight.id}' />">Edit</a>

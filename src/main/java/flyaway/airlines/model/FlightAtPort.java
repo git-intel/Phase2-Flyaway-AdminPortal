@@ -1,5 +1,7 @@
 package flyaway.airlines.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,11 +38,15 @@ public class FlightAtPort {
 	@Column(name = "flight_name")
 	protected String flight_name;
 
-	@Column(name = "flight_departuretimedate")
-	protected String flight_departuretimedate;
+	@Column(name = "flight_departure_date")
+	protected String flight_departure_date;
+	@Column(name = "flight_departure_time")
+	protected String flight_departure_time;
 
-	@Column(name = "flight_arrivaltimedate")
-	protected String flight_arrivaltimedate;
+	@Column(name = "flight_arrival_date")
+	protected String flight_arrival_date;
+	@Column(name = "flight_arrival_time")
+	protected String flight_arrival_time;
 
 	@Column(name = "ticket_price")
 	protected String ticket_price;
@@ -48,9 +54,26 @@ public class FlightAtPort {
 	public FlightAtPort() {
 	}
 
+	public FlightAtPort(String source_airport_code, String destination_airport_code, String source_airport_name,
+			String destination_airport_name, String flight_code, String flight_name, String flight_departure_date,
+			String flight_departure_time, String flight_arrival_date, String flight_arrival_time, String ticket_price) {
+		super();
+		this.source_airport_code = source_airport_code;
+		this.destination_airport_code = destination_airport_code;
+		this.source_airport_name = source_airport_name;
+		this.destination_airport_name = destination_airport_name;
+		this.flight_code = flight_code;
+		this.flight_name = flight_name;
+		this.flight_departure_date = flight_departure_date;
+		this.flight_departure_time = flight_departure_time;
+		this.flight_arrival_date = flight_arrival_date;
+		this.flight_arrival_time = flight_arrival_time;
+		this.ticket_price = ticket_price;
+	}
+
 	public FlightAtPort(int id, String source_airport_code, String destination_airport_code, String source_airport_name,
-			String destination_airport_name, String flight_code, String flight_name, String flight_departuretimedate,
-			String flight_arrivaltimedate, String ticket_price) {
+			String destination_airport_name, String flight_code, String flight_name, String flight_departure_date,
+			String flight_departure_time, String flight_arrival_date, String flight_arrival_time, String ticket_price) {
 		super();
 		this.id = id;
 		this.source_airport_code = source_airport_code;
@@ -59,23 +82,10 @@ public class FlightAtPort {
 		this.destination_airport_name = destination_airport_name;
 		this.flight_code = flight_code;
 		this.flight_name = flight_name;
-		this.flight_departuretimedate = flight_departuretimedate;
-		this.flight_arrivaltimedate = flight_arrivaltimedate;
-		this.ticket_price = ticket_price;
-	}
-
-	public FlightAtPort(String source_airport_code, String destination_airport_code, String source_airport_name,
-			String destination_airport_name, String flight_code, String flight_name, String flight_departuretimedate,
-			String flight_arrivaltimedate, String ticket_price) {
-		super();
-		this.source_airport_code = source_airport_code;
-		this.destination_airport_code = destination_airport_code;
-		this.source_airport_name = source_airport_name;
-		this.destination_airport_name = destination_airport_name;
-		this.flight_code = flight_code;
-		this.flight_name = flight_name;
-		this.flight_departuretimedate = flight_departuretimedate;
-		this.flight_arrivaltimedate = flight_arrivaltimedate;
+		this.flight_departure_date = flight_departure_date;
+		this.flight_departure_time = flight_departure_time;
+		this.flight_arrival_date = flight_arrival_date;
+		this.flight_arrival_time = flight_arrival_time;
 		this.ticket_price = ticket_price;
 	}
 
@@ -135,20 +145,36 @@ public class FlightAtPort {
 		this.flight_name = flight_name;
 	}
 
-	public String getFlight_departuretimedate() {
-		return flight_departuretimedate;
+	public String getFlight_departure_date() {
+		return flight_departure_date;
 	}
 
-	public void setFlight_departuretimedate(String flight_departuretimedate) {
-		this.flight_departuretimedate = flight_departuretimedate;
+	public void setFlight_departure_date(String flight_departure_date) {
+		this.flight_departure_date = flight_departure_date;
 	}
 
-	public String getFlight_arrivaltimedate() {
-		return flight_arrivaltimedate;
+	public String getFlight_departure_time() {
+		return flight_departure_time;
 	}
 
-	public void setFlight_arrivaltimedate(String flight_arrivaltimedate) {
-		this.flight_arrivaltimedate = flight_arrivaltimedate;
+	public void setFlight_departure_time(String flight_departure_time) {
+		this.flight_departure_time = flight_departure_time;
+	}
+
+	public String getFlight_arrival_date() {
+		return flight_arrival_date;
+	}
+
+	public void setFlight_arrival_date(String flight_arrival_date) {
+		this.flight_arrival_date = flight_arrival_date;
+	}
+
+	public String getFlight_arrival_time() {
+		return flight_arrival_time;
+	}
+
+	public void setFlight_arrival_time(String flight_arrival_time) {
+		this.flight_arrival_time = flight_arrival_time;
 	}
 
 	public String getTicket_price() {
